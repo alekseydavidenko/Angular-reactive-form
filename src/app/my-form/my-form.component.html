@@ -1,0 +1,43 @@
+<form novalidate [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
+  <fieldset formGroupName="name">
+    <div class="form-group">
+      <label for="firsName">First name</label>
+      <input id="firsName" type="text" class="form-control" formControlName="firstName" [ngClass]="{
+        'has-error': firstName.invalid && firstName.dirty,
+        'has-success': firstName.valid && firstName.dirty }">
+      <div class="alert alert-danger" *ngIf="firstName.invalid && firstName.dirty">
+        Поле обязательное для ввода
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="lastName">Last name</label>
+      <input id="lastName" type="text" class="form-control" formControlName="lastName" [ngClass]="{
+        'has-error': lastName.invalid && lastName.dirty,
+        'has-success': lastName.valid && lastName.dirty }">
+      <div class="alert alert-danger" *ngIf="lastName.invalid && lastName.dirty">
+        Поле обязательное для ввода
+      </div>
+    </div>
+  </fieldset>
+  <div class="form-group">
+    <label for="email">Email</label>
+    <input id="email" type="email" class="form-control" formControlName="email" [ngClass]="{
+      'has-error': email.invalid && email.dirty,
+      'has-success': email.valid && email.dirty }">
+    <div class="alert alert-danger" *ngIf="email.invalid && (email.dirty || email.touched)">
+      <div *ngIf="email.errors.required">Поле обязательное для ввода</div>
+      <div *ngIf="email.errors.emailValidator">Не правильный формат Email</div>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="password">Password</label>
+    <input id="password" type="password" class="form-control" formControlName="password" [ngClass]="{
+      'has-error': password.invalid && password.dirty,
+      'has-success': password.valid && password.dirty }">
+    <div class="alert alert-danger" *ngIf="password.invalid && (password.dirty || password.touched)">
+      <div *ngIf="password.errors.required">Поле обязательное для ввода</div>
+      <div *ngIf="password.errors.minlength">Минимальная длина пароля {{ password.errors.minlength.requiredLength }}</div>
+    </div>
+  </div>
+  <input type="submit" class="btn">
+</form>
